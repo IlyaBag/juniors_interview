@@ -4,7 +4,8 @@ from solution import appearance
 
 
 class TestAppearance(unittest.TestCase):
-    def setUp(self):
+
+    def test_positive_cases(self):
         self.tests = [
             {
                 'intervals': {
@@ -58,24 +59,38 @@ class TestAppearance(unittest.TestCase):
                         1594692000, 1594695600
                     ],
                     'pupil': [
-                        1594695733, 1594696347
+                        1594692033, 1594696347
                     ],
                     'tutor': [
                         1594692017, 1594692066,
                         1594692068, 1594696341
                     ]
                 },
-                'answer': 0
+                'answer': 3565
             },
         ]
-
-    def test_positive_cases(self):
         for i, test in enumerate(self.tests):
             test_answer = appearance(test['intervals'])
             self.assertEqual(test_answer, test['answer'], msg=(
                 f'Error on test case {i}, got {test_answer}, '
                 f'expected {test["answer"]}'
             ))
+
+    def test_corner_case(self):
+        zero_intervals = {
+            'lesson': [
+                1594692000, 1594695600
+            ],
+            'pupil': [
+                1594695733, 1594696347
+            ],
+            'tutor': [
+                1594692017, 1594692066,
+                1594692068, 1594696341
+            ]
+        }
+        result = appearance(zero_intervals)
+        self.assertEqual(result, 0)
 
 
 if __name__ == '__main__':
